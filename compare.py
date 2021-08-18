@@ -1,15 +1,9 @@
 # -*- coding: utf-8 -*- 
-
-# поиск дубликатов файлов. примерное количество файлов 13,3млн в 2млн папок. 24,7Тб, необходимый объём памяти 6,4Гб
-# ключевые параметры для сравнения - имя файла, размер, первый байт, контрольная сумма(может даже md5sum)
-# определить параметр для группировки, искать повторы в группах. 
-
-
 import copy
 import os
 import hashlib
-
 from datetime import datetime
+
 start_time = datetime.now()
 
 start_directory = input("Input path like 'c:/program files/' or /home/user/:")
@@ -49,7 +43,7 @@ def listfolder(current_directory):
             else:
                 pass
 
-def md5(fname): # эта функция взята целиком с интернета
+def md5(fname): # this function is taken from the internet
     hash_md5 = hashlib.md5()
     try:
         with open(fname, "rb") as f:
@@ -71,12 +65,13 @@ for key,val in filetree.items():
             # nest files into a temporary dictionary by md5.
             temptree.setdefault(md5(md5file),[])
             temptree[md5(md5file)].append(md5file)
-        for kmd5,vmd5 in temptree.items(): # пробегаем по словарю, и переносим списки где больше одного элемента
+        # go through the dictionary and transfer lists where there is more than one element 
+        for kmd5,vmd5 in temptree.items(): 
             if len(vmd5)>1:
                 dubles.update({ kmd5 : vmd5})
         temptree.clear()
 filetree.clear()
-# удаляем временный словарь, удалеям гнездо из filetree
+# remove temporary dictionary, remove nest from filetree
 print ("search complete, saving\n")
 
 
