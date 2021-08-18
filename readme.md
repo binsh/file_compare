@@ -15,16 +15,16 @@ Key parameters for comparison: filesize, first byte, check sum(md5sum)
 python compare.py (or python3 compare.py)
 
 ### Compile for Windows:
-Install installer "pip install pyinstaller" if not installed :)
+Install installer "pip install pyinstaller" if not installed :)  
 ... and compile "pyinstaller -F compare.py"
 
 
 ### Result example (dubles.txt):
 
-[e44aed1ab245bfeb1054becc3520d0f1]
-d:/dev/WebServ/denwer/utils/run.ico
-d:/dev/webServ2/etc/utils/run.ico
+[e44aed1ab245bfeb1054becc3520d0f1]  
+d:/dev/WebServ/denwer/utils/run.ico  
+d:/dev/webServ2/etc/utils/run.ico  
 
-[a00d284782cce54f083c8bd628dcd978]
-d:/dev/WebServ/usr/local/apache/bin/Apache.ico
-d:/dev/webServ2/usr/local/apache/Apache.ico
+[a00d284782cce54f083c8bd628dcd978]  
+d:/dev/WebServ/usr/local/apache/bin/Apache.ico  
+d:/dev/webServ2/usr/local/apache/Apache.ico  
