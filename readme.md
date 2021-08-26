@@ -12,7 +12,10 @@ Key parameters for comparison: filesize, first byte, check sum(md5sum)
 2. Compare check sum in group
 
 ### Run:
-python compare.py (or python3 compare.py)
+python compare.py (or python3 compare.py)  
+
+### Run with argument:
+python compare.py d:/folder/
 
 ### Compile for Windows:
 Install installer "pip install pyinstaller" if not installed :)  
