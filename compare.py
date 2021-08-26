@@ -82,25 +82,30 @@ else:
 
 
 nest_count = len(filetree)
-print ("File nesting complete.")
-print ("Nesting time: " + datetime.now() - start_time + " \nNest count: " + nest_count)
+print ("File nesting complete. Nesting time: ", (datetime.now() - start_time))
+print ("File count: ", file_count, " \nNest count: ", nest_count)
 
 
-for key,val in filetree.items():
-    if len(val)>1:
-        mayby_dubles += len(val)
+for file_list in filetree.values():
+    if len(file_list)>1:
+        mayby_dubles += len(file_list)
         pair_nest_count += 1
-        for md5file in val:
+        for file in file_list:
             # nest files into a temporary dictionary by md5.
-            temptree.setdefault(md5(md5file),[])
-            temptree[md5(md5file)].append(md5file)
+            hash_of_file = md5(file)
+            temptree.setdefault(hash_of_file,[])
+            temptree[hash_of_file].append(file)
         # go through the dictionary and transfer lists where there is more than one element 
-        for kmd5,vmd5 in temptree.items(): 
-            if len(vmd5)>1:
-                dubles.update({ kmd5 : vmd5})
+        for hash_of_file,file_list in temptree.items(): 
+            if len(file_list)>1:
+                dubles.update({hash_of_file : file_list})
         temptree.clear()
 filetree.clear()
 # remove temporary dictionary, remove nest from filetree
+
+
+print("Nest count w pair: ", pair_nest_count)
+print("Mayby dubles: ", mayby_dubles, "\nDubles: ", len(dubles))
 print ("search complete, saving\n")
 
 
@@ -111,14 +116,11 @@ with open('dubles.txt', 'w', encoding='utf8') as i:
         for filename in file_list:
             i.write(filename + "\n")
         i.write("\n")
-    i.write("\n[Stat]\nFile count: " + file_count + ", ")
-    i.write("Nest_count: " + nest_count + ", ")
-    i.write("Nest count w pair: " + pair_nest_count + "\n")
-    i.write("Total time: " + (datetime.now() - start_time) + "\n")
- 
-print("[Stat]\nFile count: " + file_count + ", Nest_count: " + nest_count)
-print("Nest count w pair: " + pair_nest_count + "\nTotal time: " + datetime.now() - start_time)
-print("Mayby dubles: " + mayby_dubles + "\nDubles: " + len(dubles))
+    i.write("\n[Stat]\nDubles: " + str(len(dubles)) + "\n") 
+    i.write("File count: " + str(file_count) + ", ")
+    i.write("Nest_count: " + str(nest_count) + ", ")
+    i.write("Nest count w pair: " + str(pair_nest_count) + "\n")
+    i.write("Total time: " + str(datetime.now() - start_time) + "\n")
 
 
 with open('exceptions.txt', 'w', encoding='utf8') as i:
@@ -131,3 +133,4 @@ with open('nulfiles.txt', 'w', encoding='utf8') as i:
     for file in nullfiles:
         i.write(file + "\n")
 
+print("Total time: ", (datetime.now() - start_time))
